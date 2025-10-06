@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Favicon (Ícone da Aba) -->
+    <link rel="icon" type="image/png" href="logo.png">
     
     <!-- Animate On Scroll (AOS) Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -132,6 +135,11 @@
 <body class="antialiased">
 
     <canvas id="starfield"></canvas>
+    
+    <!-- Imagem Espiando -->
+    <div id="espiar-container" class="fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out opacity-0 -translate-y-full pointer-events-none">
+        <img src="espiar.png" alt="Espiando" class="h-24 sm:h-32" />
+    </div>
 
     <!-- Container Principal -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -201,7 +209,7 @@
                     </div>
                 </div>
             </section>
-
+            
             <!-- Seção: Minha Filosofia -->
             <section id="filosofia" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Minha Filosofia de Trabalho</h2>
@@ -255,7 +263,7 @@
                     </div>
                     
                     <div id="jogos-content" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
-                         <a href="https://jogue-quiz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="https://placehold.co/600x400/0d1117/8b5cf6?text=Jogue+Quiz" alt="Pré-visualização do Jogue Quiz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Quiz</h3><p class="text-gray-400 mt-2 text-sm">Quiz dinâmico e personalizável para testar seus conhecimentos.</p></div></a>
+                         <a href="https://jogue-quiz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueQuiz.webp" alt="Pré-visualização do Jogue Quiz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Quiz</h3><p class="text-gray-400 mt-2 text-sm">Quiz dinâmico e personalizável para testar seus conhecimentos.</p></div></a>
                         <a href="https://jogue-stop.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueStop.webp" alt="Pré-visualização do Jogue Stop" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Stop</h3><p class="text-gray-400 mt-2 text-sm">Versão online do clássico jogo “Stop/Adedonha”.</p></div></a>
                         <a href="https://jogue-dica.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueDica.webp" alt="Pré-visualização do Jogue Dica" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Dica</h3><p class="text-gray-400 mt-2 text-sm">Jogo de adivinhações rápidas para se divertir com amigos.</p></div></a>
                         <a href="https://jogue-desenho.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueDesenho.webp" alt="Pré-visualização do Jogue Desenho" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Desenho</h3><p class="text-gray-400 mt-2 text-sm">Jogo de desenho e adivinhação em tempo limitado.</p></div></a>
@@ -431,7 +439,7 @@
 
         function resetTabInterval() {
             clearInterval(tabInterval);
-            tabInterval = setInterval(() => changeTab(1), 5000); // Muda a cada 5 segundos
+            tabInterval = setInterval(() => changeTab(1), 10000); // Muda a cada 5 segundos
         }
 
         // Iniciar
