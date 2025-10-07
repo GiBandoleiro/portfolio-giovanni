@@ -12,10 +12,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-<!-- Favicon (Ícone da Aba) -->
-    <link rel="icon" type="image/png" href="logo.webp">
 
+    <!-- Favicon (Ícone da Aba) -->
+    <link rel="icon" type="image/png" href="logo.webp">
+    
     <!-- Animate On Scroll (AOS) Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
@@ -260,9 +260,7 @@
                         <a href="https://treine-conversar.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="treineConversar.webp" alt="Pré-visualização do Treine Conversar" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Treine Conversar</h3><p class="text-gray-400 mt-2 text-sm">Chatbot para treinar conversação de forma interativa.</p></div></a>
                         <a href="https://crie-voz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="crieVoz.webp" alt="Pré-visualização do Crie Voz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Crie Voz</h3><p class="text-gray-400 mt-2 text-sm">Ferramenta de geração de áudios realistas com IA.</p></div></a>
                         <a href="https://crie-posts.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="criePost.webp" alt="Pré-visualização do Crie Posts" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Crie Posts</h3><p class="text-gray-400 mt-2 text-sm">Criador rápido de posts para redes sociais.</p></div></a>
-
- <a href="https://analise-planilhas.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="analisePlanilhas.webp" alt="Pré-visualização do Análise Planilhas" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Análise de planilhas</h3><p class="text-gray-400 mt-2 text-sm">Análise de dados detalhadas a partir de planilhas (.csv).</p></div></a>
-
+                         <a href="https://analise-planilha.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="analisePlanilhas.webp" alt="Pré-visualização do Análise Planilhas" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Análise de planilhas</h3><p class="text-gray-400 mt-2 text-sm">Análise de dados detalhadas a partir de planilhas (.csv).</p></div></a>
                     </div>
                     
                     <div id="jogos-content" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
@@ -349,21 +347,24 @@
         const canvas = document.getElementById('starfield');
         if (canvas) {
             const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = document.body.scrollHeight; // Ajusta a altura para o scroll
-
+            
             let stars = [];
             const numStars = 400;
 
-            for (let i = 0; i < numStars; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 1.5,
-                    vx: (Math.random() - 0.5) / 3,
-                    vy: (Math.random() - 0.5) / 3,
-                    opacity: Math.random() * 0.5 + 0.2
-                });
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = Math.max(document.body.scrollHeight, window.innerHeight);
+                stars = [];
+                for (let i = 0; i < numStars; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 1.5,
+                        vx: (Math.random() - 0.5) / 3,
+                        vy: (Math.random() - 0.5) / 3,
+                        opacity: Math.random() * 0.5 + 0.2
+                    });
+                }
             }
 
             function drawStars() {
@@ -393,13 +394,8 @@
                 requestAnimationFrame(animate);
             }
             
-            window.addEventListener('resize', () => {
-                 canvas.width = window.innerWidth;
-                 canvas.height = document.body.scrollHeight;
-                 stars = [];
-                 for (let i = 0; i < numStars; i++) { stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5, vx: (Math.random() - 0.5) / 3, vy: (Math.random() - 0.5) / 3, opacity: Math.random() * 0.5 + 0.2 }); }
-            });
-
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas(); // Initial setup
             animate();
         }
 
@@ -442,7 +438,7 @@
 
         function resetTabInterval() {
             clearInterval(tabInterval);
-            tabInterval = setInterval(() => changeTab(1), 5000); // Muda a cada 5 segundos
+            tabInterval = setInterval(() => changeTab(1), 10000); // Muda a cada 10 segundos
         }
 
         // Iniciar
