@@ -8,13 +8,16 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Three.js para a moeda 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <!-- Google Fonts: Manrope (Títulos) & Inter (Corpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Favicon (Ícone da Aba) -->
-    <link rel="icon" type="image/png" href="logo.webp">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/logo.webp">
     
     <!-- Animate On Scroll (AOS) Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -130,6 +133,13 @@
         .tab-button:not(.active):hover {
             color: #ccc;
         }
+
+        #coin-container canvas {
+            cursor: grab;
+        }
+        #coin-container canvas:active {
+            cursor: grabbing;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -138,7 +148,7 @@
     
     <!-- Imagem Espiando -->
     <div id="espiar-container" class="fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out opacity-0 -translate-y-full pointer-events-none">
-        <img src="espiar.webp" alt="Espiando" class="h-24 sm:h-32" />
+        <img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/espiar.webp" alt="Espiando" class="h-24 sm:h-32" />
     </div>
 
     <!-- Container Principal -->
@@ -152,14 +162,14 @@
                     <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight">
                         Giovanni Fuentes Giannetti
                     </h1>
-                    <img src="bonecoApoiado.webp" alt="Personagem apoiado no nome" class="hidden lg:block absolute top-0 left-0 w-40 transform translate-y-2 -translate-x-full pointer-events-none">
-                    <img src="bonecoDeitado.webp" alt="Personagem deitado no nome" class="lg:hidden absolute bottom-full left-1/2 w-48 transform -translate-x-1/2 pointer-events-none">
+                    <img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/bonecoApoiado.webp" alt="Personagem apoiado no nome" class="hidden lg:block absolute top-0 left-0 w-40 transform translate-y-2 -translate-x-full pointer-events-none">
+                    <img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/bonecoDeitado.webp" alt="Personagem deitado no nome" class="lg:hidden absolute bottom-full left-1/2 w-48 transform -translate-x-1/2 pointer-events-none">
                 </div>
 
                 <p class="mt-4 text-xl text-gray-400">Desenvolvedor, Designer e Estrategista Digital focado em criar experiências de alto impacto.</p>
                 
                 <div class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6">
-                    <a href="CV - Giovanni Fuentes Giannetti.pdf" download="CV - Giovanni Fuentes Giannetti.pdf" class="glass-button">
+                    <a href="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/CV%20-%20Giovanni%20Fuentes%20Giannetti.pdf" download="CV - Giovanni Fuentes Giannetti.pdf" class="glass-button">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                         Baixar Currículo
                     </a>
@@ -171,11 +181,13 @@
                 </div>
             </div>
             
-            <div class="relative flex justify-center items-center" data-aos="zoom-in">
+            <div class="relative flex justify-center items-center h-96 lg:h-auto" data-aos="zoom-in">
                 <!-- Efeito de brilho -->
                 <div class="absolute w-full h-full max-w-sm sm:max-w-md bg-violet-500/20 rounded-full blur-3xl"></div>
-                <!-- Imagem -->
-                <img src="rosto.webp" alt="Foto de Giovanni Fuentes Giannetti" class="relative w-full max-w-sm sm:max-w-md rounded-full object-cover border-2 border-white/10 shadow-2xl shadow-violet-500/10">
+                <!-- Container para a moeda 3D -->
+                <div id="coin-container" class="relative w-full h-full max-w-sm sm:max-w-md">
+                    <!-- O canvas 3D será inserido aqui pelo Three.js -->
+                </div>
             </div>
 
         </header>
@@ -257,26 +269,18 @@
                 
                 <div class="relative">
                     <div id="ferramentas-content" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <a href="https://treine-conversar.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="treineConversar.webp" alt="Pré-visualização do Treine Conversar" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Treine Conversar</h3><p class="text-gray-400 mt-2 text-sm">Chatbot para treinar conversação de forma interativa.</p></div></a>
-                        <a href="https://crie-voz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="crieVoz.webp" alt="Pré-visualização do Crie Voz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Crie Voz</h3><p class="text-gray-400 mt-2 text-sm">Ferramenta de geração de áudios realistas com IA.</p></div></a>
-                        <a href="https://crie-posts.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="criePost.webp" alt="Pré-visualização do Crie Posts" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Crie Posts</h3><p class="text-gray-400 mt-2 text-sm">Criador rápido de posts para redes sociais.</p></div></a>
-                         <a href="https://analise-planilha.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="analisePlanilhas.webp" alt="Pré-visualização do Análise Planilhas" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Análise de planilhas</h3><p class="text-gray-400 mt-2 text-sm">Análise de dados detalhadas a partir de planilhas (.csv).</p></div></a>
+                        <a href="https://treine-conversar.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/treineConversar.webp" alt="Pré-visualização do Treine Conversar" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Treine Conversar</h3><p class="text-gray-400 mt-2 text-sm">Chatbot para treinar conversação de forma interativa.</p></div></a>
+                        <a href="https://crie-voz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/crieVoz.webp" alt="Pré-visualização do Crie Voz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Crie Voz</h3><p class="text-gray-400 mt-2 text-sm">Ferramenta de geração de áudios realistas com IA.</p></div></a>
+                        <a href="https://crie-posts.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/criePost.webp" alt="Pré-visualização do Crie Posts" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Crie Posts</h3><p class="text-gray-400 mt-2 text-sm">Criador rápido de posts para redes sociais.</p></div></a>
+                         <a href="https://analise-planilhas.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/analisePlanilhas.webp" alt="Pré-visualização do Análise Planilhas" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Análise de planilhas</h3><p class="text-gray-400 mt-2 text-sm">Análise de dados detalhadas a partir de planilhas (.csv).</p></div></a>
                     </div>
                     
                     <div id="jogos-content" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
-                         <a href="https://jogue-quiz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueQuiz.webp" alt="Pré-visualização do Jogue Quiz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Quiz</h3><p class="text-gray-400 mt-2 text-sm">Quiz dinâmico e personalizável para testar seus conhecimentos.</p></div></a>
-                        <a href="https://jogue-stop.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueStop.webp" alt="Pré-visualização do Jogue Stop" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Stop</h3><p class="text-gray-400 mt-2 text-sm">Versão online do clássico jogo “Stop/Adedonha”.</p></div></a>
-                        <a href="https://jogue-dica.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueDica.webp" alt="Pré-visualização do Jogue Dica" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Dica</h3><p class="text-gray-400 mt-2 text-sm">Jogo de adivinhações rápidas para se divertir com amigos.</p></div></a>
-                        <a href="https://jogue-desenho.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueDesenho.webp" alt="Pré-visualização do Jogue Desenho" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Desenho</h3><p class="text-gray-400 mt-2 text-sm">Jogo de desenho e adivinhação em tempo limitado.</p></div></a>
+                         <a href="https://jogue-quiz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/jogueQuiz.webp" alt="Pré-visualização do Jogue Quiz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Quiz</h3><p class="text-gray-400 mt-2 text-sm">Quiz dinâmico e personalizável para testar seus conhecimentos.</p></div></a>
+                        <a href="https://jogue-stop.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/jogueStop.webp" alt="Pré-visualização do Jogue Stop" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Stop</h3><p class="text-gray-400 mt-2 text-sm">Versão online do clássico jogo “Stop/Adedonha”.</p></div></a>
+                        <a href="https://jogue-dica.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/jogueDica.webp" alt="Pré-visualização do Jogue Dica" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Dica</h3><p class="text-gray-400 mt-2 text-sm">Jogo de adivinhações rápidas para se divertir com amigos.</p></div></a>
+                        <a href="https://jogue-desenho.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/jogueDesenho.webp" alt="Pré-visualização do Jogue Desenho" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Desenho</h3><p class="text-gray-400 mt-2 text-sm">Jogo de desenho e adivinhação em tempo limitado.</p></div></a>
                     </div>
-
-                    <!-- Setas de Navegação -->
-                    <button onclick="changeTab(-1)" class="absolute top-1/2 -left-8 md:-left-16 transform -translate-y-1/2 glass-button !p-3 z-10">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    </button>
-                    <button onclick="changeTab(1)" class="absolute top-1/2 -right-8 md:-right-16 transform -translate-y-1/2 glass-button !p-3 z-10">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
                 </div>
             </section>
             
@@ -284,16 +288,64 @@
             <section id="sites" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Sites</h2>
                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                     <a href="https://tecmetrol-site.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="siteTecmetrol.webp" alt="Pré-visualização do site Tecmetrol" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Tecmetrol</h3><p class="text-gray-400 mt-2 text-sm">Site institucional para empresa de metrologia.</p></div></a>
+                      <a href="https://tecmetrol-site.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/tecmetrol.webp" alt="Pré-visualização do site Tecmetrol" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Tecmetrol</h3><p class="text-gray-400 mt-2 text-sm">Site institucional para empresa de metrologia.</p></div></a>
+                      <a href="https://drjocelino.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/odonto.webp" alt="Pré-visualização do site de Odontologia" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Site de Odontologia</h3><p class="text-gray-400 mt-2 text-sm">Solicite sua consulta online ou via WhatsApp.</p></div></a>
+                      <a href="https://empadaosalgados.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/empadao.webp" alt="Pré-visualização da Loja de Salgados" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Loja de Salgados</h3><p class="text-gray-400 mt-2 text-sm">Faça seu pedido pelo site e receba no WhatsApp.</p></div></a>
                 </div>
             </section>
 
             <!-- Seção: Designs -->
             <section id="designs" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Designs para Clientes</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <a href="https://wa.me/5516999999999?text=Ol%C3%A1%2C%20vim%20pelo%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20um%20or%C3%A7amento%20para%20posts%20de%20dentista." target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="siteDentista.webp" alt="Designs para dentista" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Social Media - Odontologia</h3><p class="text-gray-400 mt-2 text-sm">Criação de identidade visual e posts para Instagram.</p></div></a>
-                    <a href="https://wa.me/5516999999999?text=Ol%C3%A1%2C%20vim%20pelo%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20um%20or%C3%A7amento%20para%20posts%20de%20delivery." target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="siteSalgado.webp" alt="Designs para delivery de salgados" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Social Media - Delivery</h3><p class="text-gray-400 mt-2 text-sm">Artes para cardápio e posts promocionais.</p></div></a>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                     <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="font-bold text-xl text-white mb-4">Identidade Visual - Odontologia</h3>
+                        <div class="relative group">
+                            <img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/designDentista1.webp" data-images="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/designDentista1.webp,https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/designDentista2.webp" data-index="0" alt="Design para dentista" class="rounded-lg w-full h-auto object-cover">
+                            <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                     </div>
+                     <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="font-bold text-xl text-white mb-4">Criação de Logos</h3>
+                        <div class="relative group">
+                             <img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/designLogo1.webp" data-images="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/designLogo1.webp,https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/designLogo2.webp" data-index="0" alt="Exemplo de logo" class="rounded-lg w-full h-auto object-cover">
+                             <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                     </div>
+                      <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="font-bold text-xl text-white mb-4">Loja de Roupas</h3>
+                        <div class="relative group">
+                            <img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/roupa1.webp" data-images="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/roupa1.webp,https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/roupa2.webp" data-index="0" alt="Post para loja de roupas" class="rounded-lg w-full h-auto object-cover">
+                            <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                     </div>
+                     <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="400">
+                        <h3 class="font-bold text-xl text-white mb-4">Design Moderno - Instagram</h3>
+                        <div class="relative group">
+                            <img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/insta1.webp" data-images="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/insta1.webp,https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/insta2.webp" data-index="0" alt="Design moderno para Instagram" class="rounded-lg w-full h-auto object-cover">
+                            <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                     </div>
                 </div>
             </section>
 
@@ -301,9 +353,9 @@
             <section id="videos" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Vídeos com IA</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <a href="https://www.tiktok.com/@tudo.bebe" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="https://placehold.co/600x400/111827/f472b6?text=Tudo+Bebê" alt="Thumbnail de vídeo" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Tudo Bebê - TikTok</h3><p class="text-gray-400 mt-2 text-sm">Vídeos realistas de bebês gerados com Inteligência Artificial.</p></div></a>
-                    <a href="https://instagram.com/iadomultiverso" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="https://placehold.co/600x400/111827/f472b6?text=IA+do+Multiverso" alt="Thumbnail de vídeo" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">IA do Multiverso - Instagram</h3><p class="text-gray-400 mt-2 text-sm">Explorações criativas e virais utilizando o poder da IA.</p></div></a>
-                    <a href="https://www.youtube.com/@ia.do.multiverso" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="https://placehold.co/600x400/111827/f472b6?text=IA+do+Multiverso" alt="Thumbnail de vídeo" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">IA do Multiverso - YouTube</h3><p class="text-gray-400 mt-2 text-sm">Conteúdo em vídeo sobre o universo da Inteligência Artificial.</p></div></a>
+                    <a href="https://www.tiktok.com/@tudo.bebe" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/tiktokia.webp" alt="Thumbnail de vídeo TikTok" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Tudo Bebê - TikTok</h3><p class="text-gray-400 mt-2 text-sm">Vídeos realistas de bebês gerados com Inteligência Artificial.</p></div></a>
+                    <a href="https://instagram.com/iadomultiverso" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/instaia.webp" alt="Thumbnail de vídeo Instagram" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">IA do Multiverso - Instagram</h3><p class="text-gray-400 mt-2 text-sm">Explorações criativas e virais utilizando o poder da IA.</p></div></a>
+                    <a href="https://www.youtube.com/@ia.do.multiverso" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="https://raw.githubusercontent.com/GiBandoleiro/portifolio/main/public/youtube.webp" alt="Thumbnail de vídeo YouTube" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">IA do Multiverso - YouTube</h3><p class="text-gray-400 mt-2 text-sm">Conteúdo em vídeo sobre o universo da Inteligência Artificial.</p></div></a>
                 </div>
             </section>
             
@@ -342,6 +394,141 @@
             once: true,
             offset: 50,
         });
+
+        // --- SCRIPT DA MOEDA 3D ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('coin-container');
+            if (!container) return;
+
+            // 1. Cena, Câmera e Renderizador
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // 2. Luzes
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(5, 10, 7.5);
+            scene.add(directionalLight);
+
+            // 3. Geometria e Material da Moeda
+            const textureLoader = new THREE.TextureLoader();
+            // Carrega a textura a partir do arquivo local 'rosto.webp'
+            const textureUrl = 'rosto.webp';
+            const faceTexture = textureLoader.load(textureUrl);
+            
+            // Grupo para unir todas as partes da moeda
+            const coinGroup = new THREE.Group();
+            scene.add(coinGroup);
+
+            // Constantes da Moeda
+            const coinRadius = 2.5;
+            const coinThickness = 0.25;
+            const rimWidth = 0.1; // Largura da borda saltada
+
+            // Materiais
+            const graphiteMaterial = new THREE.MeshStandardMaterial({
+                color: 0x555555,
+                metalness: 0.9,
+                roughness: 0.2,
+            });
+            const faceMaterial = new THREE.MeshStandardMaterial({
+                map: faceTexture,
+                metalness: 0.8,
+                roughness: 0.3,
+            });
+
+            // Parte 1: Corpo principal da moeda (que forma a borda)
+            const bodyGeometry = new THREE.CylinderGeometry(coinRadius, coinRadius, coinThickness, 64);
+            const coinBody = new THREE.Mesh(bodyGeometry, graphiteMaterial);
+            coinGroup.add(coinBody);
+
+            // Parte 2: Face da frente com a foto (ligeiramente menor para a borda aparecer)
+            const faceGeometry = new THREE.CircleGeometry(coinRadius - rimWidth, 64);
+            const coinFace = new THREE.Mesh(faceGeometry, faceMaterial);
+            coinFace.position.y = coinThickness / 2 + 0.01; // Posiciona um pouco à frente do corpo
+            coinFace.rotation.x = -Math.PI / 2; // Deixa a face na horizontal
+            coinGroup.add(coinFace);
+            
+            // Parte 3: Verso da moeda (também menor)
+            const backFaceGeometry = new THREE.CircleGeometry(coinRadius - rimWidth, 64);
+            const backFace = new THREE.Mesh(backFaceGeometry, graphiteMaterial);
+            backFace.position.y = -coinThickness / 2 - 0.01; // Posiciona um pouco atrás do corpo
+            backFace.rotation.x = Math.PI / 2;
+            coinGroup.add(backFace);
+
+
+            // 4. Controles do Mouse
+            let mouseX = 0, mouseY = 0;
+            let targetRotationX = 0, targetRotationY = 0;
+            const windowHalfX = window.innerWidth / 2;
+            const windowHalfY = window.innerHeight / 2;
+            
+            let isMouseDown = false;
+            let previousMouseX = 0;
+            let previousMouseY = 0;
+
+            function onMouseDown(event) {
+                isMouseDown = true;
+                previousMouseX = event.clientX;
+                previousMouseY = event.clientY;
+            }
+
+            function onMouseUp() {
+                isMouseDown = false;
+            }
+
+            function onMouseMove(event) {
+                mouseX = (event.clientX - windowHalfX);
+                mouseY = (event.clientY - windowHalfY);
+
+                if (isMouseDown) {
+                    const deltaX = event.clientX - previousMouseX;
+                    const deltaY = event.clientY - previousMouseY;
+
+                    coinGroup.rotation.y += deltaX * 0.01;
+                    coinGroup.rotation.x += deltaY * 0.01;
+
+                    previousMouseX = event.clientX;
+                    previousMouseY = event.clientY;
+                }
+            }
+            
+            container.addEventListener('mousedown', onMouseDown, false);
+            window.addEventListener('mouseup', onMouseUp, false);
+            document.addEventListener('mousemove', onMouseMove, false);
+
+
+            // 5. Loop de Animação
+            function animate() {
+                requestAnimationFrame(animate);
+
+                if (!isMouseDown) {
+                    targetRotationY = (mouseX / windowHalfX) * 0.3;
+                    targetRotationX = (mouseY / windowHalfY) * 0.3;
+
+                    coinGroup.rotation.y += (targetRotationY - coinGroup.rotation.y) * 0.02;
+                    coinGroup.rotation.x += (targetRotationX - coinGroup.rotation.x) * 0.02;
+                }
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // 6. Responsividade
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        });
+
 
         // Script para o fundo de estrelas
         const canvas = document.getElementById('starfield');
@@ -388,15 +575,15 @@
                 });
             }
 
-            function animate() {
+            function animateStars() {
                 updateStars();
                 drawStars();
-                requestAnimationFrame(animate);
+                requestAnimationFrame(animateStars);
             }
             
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas(); // Initial setup
-            animate();
+            animateStars();
         }
 
         // Script para as abas
@@ -409,10 +596,12 @@
             // Update content visibility
             tabs.forEach((tab, i) => {
                 const content = document.getElementById(tab + '-content');
-                if (i === index) {
-                    content.classList.remove('hidden');
-                } else {
-                    content.classList.add('hidden');
+                if (content) {
+                    if (i === index) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
                 }
             });
             // Update button styles
@@ -457,6 +646,25 @@
                     espiarContainer.classList.add('opacity-0', '-translate-y-full');
                 }
             });
+        }
+
+        // Script para a galeria de designs
+        function navigateDesignGallery(button, direction) {
+            const galleryWrapper = button.closest('.relative');
+            const img = galleryWrapper.querySelector('img');
+            const images = img.dataset.images.split(',');
+            let currentIndex = parseInt(img.dataset.index, 10);
+            
+            currentIndex += direction;
+            
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            
+            img.dataset.index = currentIndex;
+            img.src = images[currentIndex];
         }
     </script>
 </body>
