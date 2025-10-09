@@ -174,11 +174,54 @@
         .coin-face.back {
             transform: rotateY(180deg) translateZ(4px); /* Espessura da moeda / 2 */
         }
+        
+        /* Botões de idioma */
+        .lang-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            cursor: pointer;
+        }
+        .lang-button img {
+            width: 20px;
+            height: auto;
+        }
+        .lang-button span {
+            font-weight: 600;
+            color: #c9d1d9;
+        }
+        .lang-button.active {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+        }
+        .lang-button:not(.active) {
+            opacity: 0.6;
+        }
+        .lang-button:not(.active):hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <canvas id="starfield"></canvas>
+
+    <!-- Botões de Idioma -->
+    <div class="absolute top-6 right-6 z-50 flex flex-col sm:flex-row items-center gap-3">
+        <button id="lang-pt" class="lang-button active">
+            <img src="https://flagcdn.com/w20/br.png" alt="Bandeira do Brasil">
+            <span>PT</span>
+        </button>
+        <button id="lang-en" class="lang-button">
+            <img src="https://flagcdn.com/w20/gb.png" alt="Bandeira do Reino Unido">
+            <span>EN</span>
+        </button>
+    </div>
     
     <!-- Imagem Espiando --><div id="espiar-container" class="fixed top-0 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out opacity-0 -translate-y-full pointer-events-none">
         <img src="espiar.webp" alt="Espiando" class="h-24 sm:h-32" />
@@ -197,17 +240,17 @@
                     <img src="bonecoDeitado.webp" alt="Personagem deitado no nome" class="lg:hidden absolute bottom-full left-1/2 w-48 transform -translate-x-1/2 pointer-events-none">
                 </div>
 
-                <p class="mt-4 text-xl text-gray-400">Desenvolvedor, Designer e Estrategista Digital focado em criar experiências de alto impacto.</p>
+                <p class="mt-4 text-xl text-gray-400" data-translate="hero_subtitle">Desenvolvedor, Designer e Estrategista Digital focado em criar experiências de alto impacto.</p>
                 
                 <div class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6">
                     <a href="CV - Giovanni Fuentes Giannetti.pdf" download="CV - Giovanni Fuentes Giannetti.pdf" class="glass-button">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                        Baixar Currículo
+                        <span data-translate="hero_cv_button">Baixar Currículo</span>
                     </a>
                     <div class="flex items-center gap-5">
                         <a href="https://instagram.com/giovanni.fg" target="_blank" class="social-icon text-gray-400" title="Instagram"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.784.305-1.48.77-2.175 1.465C1.27 2.808.807 3.502.502 4.287.2 5.052 0 5.922 0 7.197 0 8.474 0 8.88 0 12s.015 3.526.072 4.803c.06.944.258 1.815.553 2.572.304.786.772 1.482 1.47 2.176.697.696 1.392 1.162 2.176 1.468.757.295 1.627.495 2.572.552 1.28.057 1.687.072 4.947.072s3.667-.015 4.947-.072c.944-.057 1.815-.257 2.572-.552.785-.306 1.482-.772 2.176-1.468.697-.695 1.162-1.392 1.468-2.176.295-.757.495-1.627.552-2.572.057-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.057-.944-.257-1.815-.552-2.572-.306-.785-.772-1.482-1.468-2.176C21.192 1.27 20.498.808 19.713.502 18.948.2 18.078 0 16.803 0 15.526 0 15.12 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.056 1.17-.249 1.805-.416 2.227a3.48 3.48 0 01-.899 1.382 3.48 3.48 0 01-1.381.899c-.422.165-1.057.36-2.227.413-1.266.057-1.646.07-4.85.07s-3.585-.015-4.85-.074c-1.17-.056-1.805-.249-2.227-.416a3.48 3.48 0 01-1.382-.899 3.48 3.48 0 01-.899-1.381c-.165-.422-.36-1.057-.413-2.227-.057-1.266-.07-1.646-.07-4.85s.015-3.585.074-4.85c.056-1.17.249-1.805.416-2.227.218-.563.479-.96.899-1.382.419-.419.82-.679 1.381-.896.422-.165 1.057-.36 2.227-.413C8.415 2.176 8.797 2.16 12 2.16zm0 5.48c-2.42 0-4.36 1.94-4.36 4.36s1.94 4.36 4.36 4.36 4.36-1.94 4.36-4.36-1.94-4.36-4.36-4.36zm0 7.24c-1.59 0-2.88-1.29-2.88-2.88s1.29-2.88 2.88-2.88 2.88 1.29 2.88 2.88-1.29 2.88-2.88 2.88zm6.402-8.46c-.78 0-1.41-.63-1.41-1.41s.63-1.41 1.41-1.41 1.41.63 1.41 1.41-.63 1.41-1.41 1.41z"/></svg></a>
                         <a href="https://linkedin.com/in/giovanni-fg" target="_blank" class="social-icon text-gray-400" title="LinkedIn"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-                      
+                        
                         </a>
                         <a href="https://github.com/GiBandoleiro" target="_blank" class="social-icon text-gray-400" title="GitHub"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
                     </div>
@@ -229,26 +272,26 @@
         <main class="space-y-32">
             
             <!-- Seção Sobre Mim --><section id="sobre" data-aos="fade-up">
-                <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Sobre Mim</h2>
+                <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-translate="about_title">Sobre Mim</h2>
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-start">
-                    <div class="md:col-span-3 text-lg text-gray-300 space-y-6 leading-relaxed">
-                        <p>Olá! Sou Giovanni, um profissional multidisciplinar de Araraquara, SP. Minha jornada na tecnologia é movida pela curiosidade e pelo desejo de construir soluções que não apenas funcionem bem, mas que também encantem, engajem e gerem resultados mensuráveis.</p>
-                        <p>Minha expertise abrange desde a criação de designs para social media e protótipos no Figma, até a análise de dados em planilhas e a gestão de campanhas de tráfego pago com Meta e Google Ads. Sou um entusiasta de Inteligência Artificial, sempre explorando as últimas inovações para aplicá-las em projetos criativos.</p>
+                    <div class="md:col-span-3 text-lg text-gray-300 space-y-6 leading-relaxed text-center md:text-left">
+                        <p data-translate="about_p1">Olá! Sou Giovanni, um profissional multidisciplinar de Araraquara, SP. Minha jornada na tecnologia é movida pela curiosidade e pelo desejo de construir soluções que não apenas funcionem bem, mas que também encantem, engajem e gerem resultados mensuráveis.</p>
+                        <p data-translate="about_p2">Minha expertise abrange desde a criação de designs para social media e protótipos no Figma, até a análise de dados em planilhas e a gestão de campanhas de tráfego pago com Meta e Google Ads. Sou um entusiasta de Inteligência Artificial, sempre explorando as últimas inovações para aplicá-las em projetos criativos.</p>
                     </div>
                     <div class="md:col-span-2 space-y-6">
                         <div class="glass-card p-6 rounded-2xl flex items-start gap-4" data-aos="fade-left" data-aos-delay="100">
                              <div class="text-violet-400 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></div>
                              <div>
-                                <h4 class="font-bold text-lg text-white">Formação Acadêmica</h4>
-                                <p class="text-gray-400 mb-2">Análise e Desenvolvimento de Sistemas<br><span class="font-semibold text-gray-200">IFSP - Araraquara, Brasil</span></p>
-                                <p class="text-gray-400"><span class="font-semibold text-gray-200">Intercâmbio Acadêmico</span><br>Engenharia Eletrotécnica e de Computadores<br><span class="font-semibold text-gray-200">ISEP - Porto, Portugal</span></p>
+                                 <h4 class="font-bold text-lg text-white" data-translate="education_title">Formação Acadêmica</h4>
+                                 <p class="text-gray-400 mb-2" data-translate="education_course">Análise e Desenvolvimento de Sistemas<br><span class="font-semibold text-gray-200">IFSP - Araraquara, Brasil</span></p>
+                                 <p class="text-gray-400"><span class="font-semibold text-gray-200" data-translate="exchange_title">Intercâmbio Acadêmico</span><br><span data-translate="exchange_course">Engenharia Eletrotécnica e de Computadores</span><br><span class="font-semibold text-gray-200">ISEP - Porto, Portugal</span></p>
                              </div>
                         </div>
                          <div class="glass-card p-6 rounded-2xl flex items-start gap-4" data-aos="fade-left" data-aos-delay="200">
                              <div class="text-violet-400 mt-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg></div>
                              <div>
-                                <h4 class="font-bold text-lg text-white">Marketing Digital e Gestão</h4>
-                                <p class="text-gray-400">Meta Ads, Google Ads, Tráfego Pago, Planilhas</p>
+                                 <h4 class="font-bold text-lg text-white" data-translate="marketing_title">Marketing Digital e Gestão</h4>
+                                 <p class="text-gray-400" data-translate="marketing_skills">Meta Ads, Google Ads, Tráfego Pago, Planilhas</p>
                              </div>
                         </div>
                     </div>
@@ -256,25 +299,25 @@
             </section>
 
             <!-- Seção: Minha Filosofia --><section id="filosofia" data-aos="fade-up">
-                <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Minha Filosofia de Trabalho</h2>
+                <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-translate="philosophy_title">Minha Filosofia de Trabalho</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="glass-card p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="text-xl font-bold text-white mb-2">Design Centrado no Usuário</h3>
-                        <p class="text-gray-400">Crio interfaces que são intuitivas, bonitas e que resolvem problemas reais para as pessoas.</p>
+                        <h3 class="text-xl font-bold text-white mb-2" data-translate="philosophy1_title">Design Centrado no Usuário</h3>
+                        <p class="text-gray-400" data-translate="philosophy1_text">Crio interfaces que são intuitivas, bonitas e que resolvem problemas reais para as pessoas.</p>
                     </div>
                     <div class="glass-card p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="text-xl font-bold text-white mb-2">Decisões Guiadas por Dados</h3>
-                        <p class="text-gray-400">Utilizo métricas e análises para embasar decisões criativas e otimizar o desempenho.</p>
+                        <h3 class="text-xl font-bold text-white mb-2" data-translate="philosophy2_title">Decisões Guiadas por Dados</h3>
+                        <p class="text-gray-400" data-translate="philosophy2_text">Utilizo métricas e análises para embasar decisões criativas e otimizar o desempenho.</p>
                     </div>
                     <div class="glass-card p-6 rounded-2xl text-center" data-aos="fade-up" data-aos-delay="300">
-                        <h3 class="text-xl font-bold text-white mb-2">Paixão por Inovação</h3>
-                        <p class="text-gray-400">Estou sempre aprendendo e experimentando com novas tecnologias, especialmente IA.</p>
+                        <h3 class="text-xl font-bold text-white mb-2" data-translate="philosophy3_title">Paixão por Inovação</h3>
+                        <p class="text-gray-400" data-translate="philosophy3_text">Estou sempre aprendendo e experimentando com novas tecnologias, especialmente IA.</p>
                     </div>
                 </div>
             </section>
             
             <!-- Seção: Tecnologias --><section id="tecnologias" data-aos="fade-up">
-                 <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Tecnologias</h2>
+                 <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-translate="tech_title">Tecnologias</h2>
                  <div class="glass-card p-8 rounded-2xl">
                     <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-8 text-center">
                         <div class="tech-item flex flex-col items-center gap-2"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="Logo do HTML5"><span class="text-sm text-gray-400 font-medium">HTML5</span></div>
@@ -291,114 +334,114 @@
             </section>
             
             <!-- Seção: Apps --><section id="projetos" data-aos="fade-up">
-                <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Apps</h2>
+                <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-translate="apps_title">Apps</h2>
                 <div class="flex justify-center gap-4 mb-12">
-                    <button class="tab-button active" onclick="manualShowTab(0)">Ferramentas</button>
-                    <button class="tab-button" onclick="manualShowTab(1)">Jogos</button>
+                    <button class="tab-button active" onclick="manualShowTab(0)" data-translate="apps_tab1">Ferramentas</button>
+                    <button class="tab-button" onclick="manualShowTab(1)" data-translate="apps_tab2">Jogos</button>
                 </div>
                 
                 <div class="relative">
                     <div id="ferramentas-content" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <a href="https://treine-conversar.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="treineConversar.webp" alt="Pré-visualização do Treine Conversar" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Treine Conversar</h3><p class="text-gray-400 mt-2 text-sm">Chatbot para treinar conversação de forma interativa.</p></div></a>
-                        <a href="https://crie-voz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="crieVoz.webp" alt="Pré-visualização do Crie Voz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Crie Voz</h3><p class="text-gray-400 mt-2 text-sm">Ferramenta de geração de áudios realistas com IA.</p></div></a>
-                        <a href="https://crie-posts.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="criePost.webp" alt="Pré-visualização do Crie Posts" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Crie Posts</h3><p class="text-gray-400 mt-2 text-sm">Criador rápido de posts para redes sociais.</p></div></a>
-			<a href="https://estude-quiz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="estudeQuiz.webp" alt="Pré-visualização do Análise Planilhas" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Crie um quiz em segundos</h3><p class="text-gray-400 mt-2 text-sm">Criador de quiz interativo a partir de um tema (texto) ou um arquivo. Pronto em segundos!</p></div></a>
-                         <a href="https://analise-planilhas.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="analisePlanilhas.webp" alt="Pré-visualização do Crie Quiz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Análise de planilhas</h3><p class="text-gray-400 mt-2 text-sm">Análise de dados detalhadas a partir de planilhas (.csv).</p></div></a>
+                        <a href="https://treine-conversar.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="treineConversar.webp" alt="Pré-visualização do Treine Conversar" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="app1_title">Treine Conversar</h3><p class="text-gray-400 mt-2 text-sm" data-translate="app1_desc">Chatbot para treinar conversação de forma interativa.</p></div></a>
+                        <a href="https://crie-voz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="crieVoz.webp" alt="Pré-visualização do Crie Voz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="app2_title">Crie Voz</h3><p class="text-gray-400 mt-2 text-sm" data-translate="app2_desc">Ferramenta de geração de áudios realistas com IA.</p></div></a>
+                        <a href="https://crie-posts.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="criePost.webp" alt="Pré-visualização do Crie Posts" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="app3_title">Crie Posts</h3><p class="text-gray-400 mt-2 text-sm" data-translate="app3_desc">Criador rápido de posts para redes sociais.</p></div></a>
+			<a href="https://estude-quiz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="estudeQuiz.webp" alt="Pré-visualização do Análise Planilhas" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="app4_title">Crie um quiz em segundos</h3><p class="text-gray-400 mt-2 text-sm" data-translate="app4_desc">Criador de quiz interativo a partir de um tema (texto) ou um arquivo. Pronto em segundos!</p></div></a>
+                         <a href="https://analise-planilha.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="analisePlanilhas.webp" alt="Pré-visualização do Crie Quiz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="app5_title">Análise de planilhas</h3><p class="text-gray-400 mt-2 text-sm" data-translate="app5_desc">Análise de dados detalhadas a partir de planilhas (.csv).</p></div></a>
                     </div>
                     
                     <div id="jogos-content" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
-                         <a href="https://jogue-quiz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueQuiz.webp" alt="Pré-visualização do Jogue Quiz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Quiz</h3><p class="text-gray-400 mt-2 text-sm">Quiz dinâmico e personalizável para testar seus conhecimentos.</p></div></a>
-                        <a href="https://jogue-stop.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueStop.webp" alt="Pré-visualização do Jogue Stop" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Stop</h3><p class="text-gray-400 mt-2 text-sm">Versão online do clássico jogo “Stop/Adedonha”.</p></div></a>
-                        <a href="https://jogue-dica.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueDica.webp" alt="Pré-visualização do Jogue Dica" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Dica</h3><p class="text-gray-400 mt-2 text-sm">Jogo de adivinhações rápidas para se divertir com amigos.</p></div></a>
-                        <a href="https://jogue-desenho.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueDesenho.webp" alt="Pré-visualização do Jogue Desenho" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Desenho</h3><p class="text-gray-400 mt-2 text-sm">Jogo de desenho e adivinhação em tempo limitado.</p></div></a>
-			<a href="https://jogue-batataquente.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="batataQuente.webp" alt="Pré-visualização do Jogue Batata Quente" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Jogue Batata Quente</h3><p class="text-gray-400 mt-2 text-sm">Jogo de falar palavras de um assunto específico, dentro de um limite de tempo, senão... BOOM!</p></div></a>
+                         <a href="https://jogue-quiz.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueQuiz.webp" alt="Pré-visualização do Jogue Quiz" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="game1_title">Jogue Quiz</h3><p class="text-gray-400 mt-2 text-sm" data-translate="game1_desc">Quiz dinâmico e personalizável para testar seus conhecimentos.</p></div></a>
+                        <a href="https://jogue-stop.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueStop.webp" alt="Pré-visualização do Jogue Stop" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="game2_title">Jogue Stop</h3><p class="text-gray-400 mt-2 text-sm" data-translate="game2_desc">Versão online do clássico jogo “Stop/Adedonha”.</p></div></a>
+                        <a href="https://jogue-dica.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueDica.webp" alt="Pré-visualização do Jogue Dica" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="game3_title">Jogue Dica</h3><p class="text-gray-400 mt-2 text-sm" data-translate="game3_desc">Jogo de adivinhações rápidas para se divertir com amigos.</p></div></a>
+                        <a href="https://jogue-desenho.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="jogueDesenho.webp" alt="Pré-visualização do Jogue Desenho" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="game4_title">Jogue Desenho</h3><p class="text-gray-400 mt-2 text-sm" data-translate="game4_desc">Jogo de desenho e adivinhação em tempo limitado.</p></div></a>
+			<a href="https://jogue-batataquente.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block"><img src="batataQuente.webp" alt="Pré-visualização do Jogue Batata Quente" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="game5_title">Jogue Batata Quente</h3><p class="text-gray-400 mt-2 text-sm" data-translate="game5_desc">Jogo de falar palavras de um assunto específico, dentro de um limite de tempo, senão... BOOM!</p></div></a>
 
                     </div>
                 </div>
             </section>
             
             <!-- Seção: Sites --><section id="sites" data-aos="fade-up">
-                <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Sites</h2>
+                <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-translate="sites_title">Sites</h2>
                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                      <a href="https://tecmetrol-site.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="tecmetrol.webp" alt="Pré-visualização do site Tecmetrol" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Tecmetrol</h3><p class="text-gray-400 mt-2 text-sm">Site institucional para empresa de metrologia.</p></div></a>
-                      <a href="https://drjocelino.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="odonto.webp" alt="Pré-visualização do site de Odontologia" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Site de Odontologia</h3><p class="text-gray-400 mt-2 text-sm">Solicite sua consulta online ou via WhatsApp.</p></div></a>
-                      <a href="https://empadaosalgados.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="empadao.webp" alt="Pré-visualização da Loja de Salgados" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Loja de Salgados</h3><p class="text-gray-400 mt-2 text-sm">Faça seu pedido pelo site e receba no WhatsApp.</p></div></a>
+                      <a href="https://tecmetrol-site.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="tecmetrol.webp" alt="Pré-visualização do site Tecmetrol" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="site1_title">Tecmetrol</h3><p class="text-gray-400 mt-2 text-sm" data-translate="site1_desc">Site institucional para empresa de metrologia.</p></div></a>
+                      <a href="https://site-odontologia-one.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="odonto.webp" alt="Pré-visualização do site de Odontologia" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="site2_title">Site de Odontologia</h3><p class="text-gray-400 mt-2 text-sm" data-translate="site2_desc">Solicite sua consulta online ou via WhatsApp.</p></div></a>
+                      <a href="https://empadaosalgados.vercel.app" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="empadao.webp" alt="Pré-visualização da Loja de Salgados" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="site3_title">Loja de Salgados</h3><p class="text-gray-400 mt-2 text-sm" data-translate="site3_desc">Faça seu pedido pelo site e receba no WhatsApp.</p></div></a>
                 </div>
             </section>
 
             <!-- Seção: Designs --><section id="designs" data-aos="fade-up">
-                <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Designs</h2>
+                <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-translate="designs_title">Designs</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                     <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="100">
-                        <h3 class="font-bold text-xl text-white mb-4">Identidade Visual - Odontologia</h3>
-                        <div class="relative group">
-                            <img src="designDentista1.webp" data-images="designDentista1.webp,designDentista2.webp" data-index="0" alt="Design para dentista" class="rounded-lg w-full h-auto object-cover">
-                            <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                            </button>
-                            <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </button>
-                        </div>
-                     </div>
-                     <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="font-bold text-xl text-white mb-4">Criação de Logos</h3>
-                        <div class="relative group">
-                             <img src="logo1.webp" data-images="logo1.webp,logo2.webp" data-index="0" alt="Exemplo de logo" class="rounded-lg w-full h-auto object-cover">
-                             <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                            </button>
-                            <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </button>
-                        </div>
-                     </div>
-                      <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="300">
-                        <h3 class="font-bold text-xl text-white mb-4">Loja de Roupas</h3>
-                        <div class="relative group">
-                            <img src="roupa1.webp" data-images="roupa1.webp,roupa2.webp" data-index="0" alt="Post para loja de roupas" class="rounded-lg w-full h-auto object-cover">
-                            <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                            </button>
-                            <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </button>
-                        </div>
-                     </div>
-                     <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="400">
-                        <h3 class="font-bold text-xl text-white mb-4">Demais designs</h3>
-                        <div class="relative group">
-                            <img src="resto3.webp" data-images="resto1.webp,resto2.webp,resto3.webp,resto4.webp,resto5.webp,resto6.webp,resto7.webp" data-index="0" alt="Design moderno para Instagram" class="rounded-lg w-full h-auto object-cover">
-                            <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                            </button>
-                            <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            </button>
-                        </div>
-                     </div>
+                       <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="100">
+                           <h3 class="font-bold text-xl text-white mb-4" data-translate="design1_title">Identidade Visual - Odontologia</h3>
+                           <div class="relative group">
+                                <img src="designDentista1.webp" data-images="designDentista1.webp,designDentista2.webp" data-index="0" alt="Design para dentista" class="rounded-lg w-full h-auto object-cover">
+                                <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                </button>
+                                <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </button>
+                           </div>
+                       </div>
+                       <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="200">
+                           <h3 class="font-bold text-xl text-white mb-4" data-translate="design2_title">Criação de Logos</h3>
+                           <div class="relative group">
+                                <img src="logo1.webp" data-images="logo1.webp,logo2.webp" data-index="0" alt="Exemplo de logo" class="rounded-lg w-full h-auto object-cover">
+                                <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                </button>
+                                <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </button>
+                           </div>
+                       </div>
+                        <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="300">
+                           <h3 class="font-bold text-xl text-white mb-4" data-translate="design3_title">Loja de Roupas</h3>
+                           <div class="relative group">
+                                <img src="roupa1.webp" data-images="roupa1.webp,roupa2.webp" data-index="0" alt="Post para loja de roupas" class="rounded-lg w-full h-auto object-cover">
+                                <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                </button>
+                                <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </button>
+                           </div>
+                       </div>
+                       <div class="glass-card rounded-2xl p-6" data-aos="fade-up" data-aos-delay="400">
+                           <h3 class="font-bold text-xl text-white mb-4" data-translate="design4_title">Demais designs</h3>
+                           <div class="relative group">
+                                <img src="resto3.webp" data-images="resto1.webp,resto2.webp,resto3.webp,resto4.webp,resto5.webp,resto6.webp,resto7.webp" data-index="0" alt="Design moderno para Instagram" class="rounded-lg w-full h-auto object-cover">
+                                <button onclick="navigateDesignGallery(this, -1)" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                </button>
+                                <button onclick="navigateDesignGallery(this, 1)" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-1 hover:bg-black/50 transition opacity-0 group-hover:opacity-100">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </button>
+                           </div>
+                       </div>
                 </div>
             </section>
 
              <!-- Seção: Vídeos com IA --><section id="videos" data-aos="fade-up">
-                <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Vídeos com IA</h2>
+                <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-translate="videos_title">Vídeos com IA</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <a href="https://www.tiktok.com/@tudo.bebe" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="tiktokia.webp" alt="Thumbnail de vídeo TikTok" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">Tudo Bebê - TikTok</h3><p class="text-gray-400 mt-2 text-sm">Vídeos realistas de bebês gerados com Inteligência Artificial.</p></div></a>
-                    <a href="https://instagram.com/iadomultiverso" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="instaia.webp" alt="Thumbnail de vídeo Instagram" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">IA do Multiverso - Instagram</h3><p class="text-gray-400 mt-2 text-sm">Explorações criativas e virais utilizando o poder da IA.</p></div></a>
-                    <a href="https://www.youtube.com/@ia.do.multiverso" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="youtube.webp" alt="Thumbnail de vídeo YouTube" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white">IA do Multiverso - YouTube</h3><p class="text-gray-400 mt-2 text-sm">Conteúdo em vídeo sobre o universo da Inteligência Artificial.</p></div></a>
+                    <a href="https://www.tiktok.com/@tudo.bebe" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="100"><img src="tiktokia.webp" alt="Thumbnail de vídeo TikTok" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="video1_title">Tudo Bebê - TikTok</h3><p class="text-gray-400 mt-2 text-sm" data-translate="video1_desc">Vídeos realistas de bebês gerados com Inteligência Artificial.</p></div></a>
+                    <a href="https://instagram.com/iadomultiverso" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="200"><img src="instaia.webp" alt="Thumbnail de vídeo Instagram" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="video2_title">IA do Multiverso - Instagram</h3><p class="text-gray-400 mt-2 text-sm" data-translate="video2_desc">Explorações criativas e virais utilizando o poder da IA.</p></div></a>
+                    <a href="https://www.youtube.com/@ia.do.multiverso" target="_blank" class="glass-card rounded-2xl overflow-hidden block" data-aos="fade-up" data-aos-delay="300"><img src="youtube.webp" alt="Thumbnail de vídeo YouTube" class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"><div class="p-6"><h3 class="font-bold text-xl text-white" data-translate="video3_title">IA do Multiverso - YouTube</h3><p class="text-gray-400 mt-2 text-sm" data-translate="video3_desc">Conteúdo em vídeo sobre o universo da Inteligência Artificial.</p></div></a>
                 </div>
             </section>
             
             <!-- Seção de Contato --><section id="contato" data-aos="fade-up">
-                <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Entre em Contato</h2>
+                <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-translate="contact_title">Entre em Contato</h2>
                 <div class="max-w-3xl mx-auto text-center">
-                    <p class="text-lg text-gray-400 mb-8">
+                    <p class="text-lg text-gray-400 mb-8" data-translate="contact_p1">
                         Gostou do que viu? Adoraria conversar sobre novas ideias, projetos e oportunidades. Sinta-se à vontade para me contatar através dos canais abaixo.
                     </p>
                     <div class="flex justify-center items-center gap-8">
                         <a href="mailto:giovanni.fg2002@gmail.com" class="glass-button">
                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                            E-mail
+                            <span data-translate="contact_button1">E-mail</span>
                         </a>
                          <a href="https://linkedin.com/in/giovanni-fg" target="_blank" class="glass-button">
                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
@@ -411,7 +454,7 @@
         </main>
 
         <footer class="text-center mt-32 py-12 border-t border-white/10">
-            <p class="text-gray-500">&copy; 2025 Giovanni Fuentes Giannetti. Todos os direitos reservados.</p>
+            <p class="text-gray-500" data-translate="footer_text">&copy; 2025 Giovanni Fuentes Giannetti. Todos os direitos reservados.</p>
         </footer>
 
     </div>
@@ -657,7 +700,128 @@
                 }
             });
         }
+
+        // Script de Tradução
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                hero_subtitle: {
+                    pt: "Desenvolvedor, Designer e Estrategista Digital focado em criar experiências de alto impacto.",
+                    en: "Developer, Designer, and Digital Strategist focused on creating high-impact experiences."
+                },
+                hero_cv_button: { pt: "Baixar Currículo", en: "Download CV" },
+                about_title: { pt: "Sobre Mim", en: "About Me" },
+                about_p1: {
+                    pt: "Oi! Sou Giovanni, do interior de SP. Adoro explorar a tecnologia e criar soluções que não apenas funcionam, mas que surpreendem e envolvem quem as usa, trazendo resultados reais ao mesmo tempo.",
+                    en: "Hi! I’m Giovanni, from the countryside of São Paulo. I love exploring technology and creating solutions that not only work, but also surprise and engage the people who use them, delivering real results at the same time."
+                },
+                about_p2: {
+                    pt: "Minha expertise abrange desde a criação de designs para social media e protótipos no Figma, programação, marketing digital, até a análise de dados em planilhas e a gestão de campanhas de tráfego pago com Meta e Google Ads. Sou um entusiasta de Inteligência Artificial, sempre explorando as últimas inovações para aplicá-las em projetos criativos.",
+                    en: "My expertise ranges from creating social media designs and prototypes in Figma, to programming, digital marketing, data analysis in spreadsheets, and managing paid traffic campaigns on Meta and Google Ads. I’m passionate about Artificial Intelligence, constantly exploring the latest innovations to apply them in creative projects."
+                },
+                education_title: { pt: "Formação Acadêmica", en: "Academic Education" },
+                education_course: { pt: "Análise e Desenvolvimento de Sistemas", en: "Analysis and Systems Development" },
+                exchange_title: { pt: "Intercâmbio Acadêmico", en: "Academic Exchange" },
+                exchange_course: { pt: "Engenharia Eletrotécnica e de Computadores", en: "Electrical and Computer Engineering" },
+                marketing_title: { pt: "Marketing Digital e Gestão", en: "Digital Marketing and Management" },
+                marketing_skills: { pt: "Meta Ads, Google Ads, Tráfego Pago, Planilhas", en: "Meta Ads, Google Ads, Paid Traffic, Spreadsheets" },
+                philosophy_title: { pt: "Minha Filosofia de Trabalho", en: "My Work Philosophy" },
+                philosophy1_title: { pt: "Design Centrado no Usuário", en: "User-Centered Design" },
+                philosophy1_text: { pt: "Crio interfaces que são intuitivas, bonitas e que resolvem problemas reais para as pessoas.", en: "I create interfaces that are intuitive, beautiful, and solve real problems for people." },
+                philosophy2_title: { pt: "Decisões Guiadas por Dados", en: "Data-Driven Decisions" },
+                philosophy2_text: { pt: "Utilizo métricas e análises para embasar decisões criativas e otimizar o desempenho.", en: "I use metrics and analysis to base creative decisions and optimize performance." },
+                philosophy3_title: { pt: "Paixão por Inovação", en: "Passion for Innovation" },
+                philosophy3_text: { pt: "Estou sempre aprendendo e experimentando com novas tecnologias, especialmente IA.", en: "I am always learning and experimenting with new technologies, especially AI." },
+                tech_title: { pt: "Tecnologias", en: "Technologies" },
+                apps_title: { pt: "Apps", en: "Apps" },
+                apps_tab1: { pt: "Ferramentas", en: "Tools" },
+                apps_tab2: { pt: "Jogos", en: "Games" },
+                app1_title: { pt: "Treine Conversar", en: "Practice Talking" },
+                app1_desc: { pt: "Chatbot para treinar conversação de forma interativa.", en: "Chatbot to practice conversation interactively." },
+                app2_title: { pt: "Crie Voz", en: "Create Voice" },
+                app2_desc: { pt: "Ferramenta de geração de áudios realistas com IA.", en: "AI-powered realistic audio generation tool." },
+                app3_title: { pt: "Crie Posts", en: "Create Posts" },
+                app3_desc: { pt: "Criador rápido de posts para redes sociais.", en: "Quick post creator for social media." },
+                app4_title: { pt: "Crie um quiz em segundos", en: "Create a quiz in seconds" },
+                app4_desc: { pt: "Criador de quiz interativo a partir de um tema (texto) ou um arquivo. Pronto em segundos!", en: "Interactive quiz creator from a topic (text) or a file. Ready in seconds!" },
+                app5_title: { pt: "Análise de planilhas", en: "Spreadsheet Analysis" },
+                app5_desc: { pt: "Análise de dados detalhadas a partir de planilhas (.csv).", en: "Detailed data analysis from spreadsheets (.csv)." },
+                game1_title: { pt: "Jogue Quiz", en: "Play Quiz" },
+                game1_desc: { pt: "Quiz dinâmico e personalizável para testar seus conhecimentos.", en: "Dynamic and customizable quiz to test your knowledge." },
+                game2_title: { pt: "Jogue Stop", en: "Play Stop" },
+                game2_desc: { pt: "Versão online do clássico jogo “Stop/Adedonha”.", en: "Online version of the classic 'Stop/Categories' game." },
+                game3_title: { pt: "Jogue Dica", en: "Play Hint" },
+                game3_desc: { pt: "Jogo de adivinhações rápidas para se divertir com amigos.", en: "Quick guessing game to have fun with friends." },
+                game4_title: { pt: "Jogue Desenho", en: "Play Draw" },
+                game4_desc: { pt: "Jogo de desenho e adivinhação em tempo limitado.", en: "Drawing and guessing game with a time limit." },
+                game5_title: { pt: "Jogue Batata Quente", en: "Play Hot Potato" },
+                game5_desc: { pt: "Jogo de falar palavras de um assunto específico, dentro de um limite de tempo, senão... BOOM!", en: "Game of saying words on a specific topic, within a time limit, or else... BOOM!" },
+                sites_title: { pt: "Sites", en: "Websites" },
+                site1_title: { pt: "Tecmetrol", en: "Tecmetrol" },
+                site1_desc: { pt: "Site institucional para empresa de metrologia.", en: "Institutional website for a metrology company." },
+                site2_title: { pt: "Site de Odontologia", en: "Dentistry Website" },
+                site2_desc: { pt: "Solicite sua consulta online ou via WhatsApp.", en: "Request your appointment online or via WhatsApp." },
+                site3_title: { pt: "Loja de Salgados", en: "Snacks Shop" },
+                site3_desc: { pt: "Faça seu pedido pelo site e receba no WhatsApp.", en: "Place your order through the website and receive it on WhatsApp." },
+                designs_title: { pt: "Designs", en: "Designs" },
+                design1_title: { pt: "Identidade Visual - Odontologia", en: "Visual Identity - Dentistry" },
+                design2_title: { pt: "Criação de Logos", en: "Logo Creation" },
+                design3_title: { pt: "Loja de Roupas", en: "Clothing Store" },
+                design4_title: { pt: "Demais designs", en: "Other designs" },
+                videos_title: { pt: "Vídeos com IA", en: "Videos with AI" },
+                video1_title: { pt: "Tudo Bebê - TikTok", en: "Everything Baby - TikTok" },
+                video1_desc: { pt: "Vídeos realistas de bebês gerados com Inteligência Artificial.", en: "Realistic baby videos generated with Artificial Intelligence." },
+                video2_title: { pt: "IA do Multiverso - Instagram", en: "Multiverse AI - Instagram" },
+                video2_desc: { pt: "Explorações criativas e virais utilizando o poder da IA.", en: "Creative and viral explorations using the power of AI." },
+                video3_title: { pt: "IA do Multiverso - YouTube", en: "Multiverse AI - YouTube" },
+                video3_desc: { pt: "Conteúdo em vídeo sobre o universo da Inteligência Artificial.", en: "Video content about the universe of Artificial Intelligence." },
+                contact_title: { pt: "Entre em Contato", en: "Get in Touch" },
+                contact_p1: {
+                    pt: "Gostou do que viu? Adoraria conversar sobre novas ideias, projetos e oportunidades. Sinta-se à vontade para me contatar através dos canais abaixo.",
+                    en: "Liked what you saw? I'd love to chat about new ideas, projects, and opportunities. Feel free to contact me through the channels below."
+                },
+                contact_button1: { pt: "E-mail", en: "Email" },
+                footer_text: { pt: "© 2025 Giovanni Fuentes Giannetti. Todos os direitos reservados.", en: "© 2025 Giovanni Fuentes Giannetti. All rights reserved." }
+            };
+
+            const langPtButton = document.getElementById('lang-pt');
+            const langEnButton = document.getElementById('lang-en');
+
+            const setLanguage = (lang) => {
+                document.querySelectorAll('[data-translate]').forEach(el => {
+                    const key = el.dataset.translate;
+                    if (translations[key] && translations[key][lang]) {
+                        el.innerHTML = translations[key][lang];
+                    }
+                });
+
+                const cvButton = document.querySelector('header .glass-button');
+                if (cvButton) {
+                    if (lang === 'en') {
+                        cvButton.href = 'CV-EN-Giovanni Fuentes Giannetti.pdf';
+                        cvButton.setAttribute('download', 'CV-EN-Giovanni Fuentes Giannetti.pdf');
+                    } else {
+                        cvButton.href = 'CV - Giovanni Fuentes Giannetti.pdf';
+                        cvButton.setAttribute('download', 'CV - Giovanni Fuentes Giannetti.pdf');
+                    }
+                }
+
+                document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+                if (lang === 'pt') {
+                    langPtButton.classList.add('active');
+                    langEnButton.classList.remove('active');
+                } else {
+                    langEnButton.classList.add('active');
+                    langPtButton.classList.remove('active');
+                }
+            };
+
+            langPtButton.addEventListener('click', () => setLanguage('pt'));
+            langEnButton.addEventListener('click', () => setLanguage('en'));
+
+            // Define o idioma inicial
+            setLanguage('pt');
+        });
     </script>
 </body>
 </html>
-
